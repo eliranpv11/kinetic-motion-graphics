@@ -26,3 +26,5 @@
 - Mixed Hebrew + Latin in one line ("כמו AI") works inside one `Word`; for a Latin hero word, give it its own `Word`.
 - Use Hebrew gershayim (״קלוד״) for quotes on screen, not ASCII quotes.
 - Progress and timelines that represent sequence run right to left in Hebrew (step 1 on the right).
+
+For a whole-video look other than this default (Swiss grid, case file, riso print, dark keynote, news captions, game show, whiteboard), see `style-worlds.md`.

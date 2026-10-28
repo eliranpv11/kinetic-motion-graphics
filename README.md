@@ -46,7 +46,7 @@ Claude writes the script, asks for your approval, runs a cheap pronunciation pro
 commands/          /kinetic-video
 skills/kinetic-motion-graphics/
   SKILL.md         the 8-step pipeline, approval gates, cost rules
-  references/      design system, Hebrew writing, pronunciation, voice, timing, hooks and sound, metaphors
+  references/      design system, style worlds, Hebrew writing, pronunciation, voice, timing, hooks and sound, metaphors
   scripts/         word_timings.py, retime.py, pitch_report.py, make_sfx.py
   assets/          Remotion project template, component kit, a full example storyboard
 ```

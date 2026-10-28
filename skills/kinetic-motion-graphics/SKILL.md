@@ -74,14 +74,14 @@ Run `scripts/word_timings.py` on the final audio to get `words.json`. Transcribe
 
 ## 6. Storyboard and build
 
-Group words into scenes: one idea per scene, cut on the pause between sentences, 1.2 to 3.5 s each. Mark one hero word per scene. Every scene must move one value (hard → easy, hidden → shown, off → on) and leave a small question the next scene answers; merge or cut scenes that do neither. For each scene choose a world and a metaphor (`references/visual-metaphors.md`), write one colour-script comment (world + colour) and read the comments as a sequence, then write the scene in `src/Video.tsx` as a `SceneDef` with absolute times from `words.json`. Cutting craft (one lead per cut, eye trace, camera move by intent, one motivated hold) is in `references/story-and-production.md`.
+First pick the video's **style world** from its topic and tone (`references/style-worlds.md`: Swiss grid, case file, riso print, dark keynote, news captions, game show, whiteboard, or the kit's default look) and place its strongest native move on the payoff. Then group words into scenes: one idea per scene, cut on the pause between sentences, 1.2 to 3.5 s each. Mark one hero word per scene. Every scene must move one value (hard → easy, hidden → shown, off → on) and leave a small question the next scene answers; merge or cut scenes that do neither. For each scene choose a world and a metaphor (`references/visual-metaphors.md`), write one colour-script comment (world + colour) and read the comments as a sequence, then write the scene in `src/Video.tsx` as a `SceneDef` with absolute times from `words.json`. Cutting craft (one lead per cut, eye trace, camera move by intent, one motivated hold) is in `references/story-and-production.md`.
 
 Visual rules (numbers in `references/timing-and-motion.md`, style in `references/design-system.md`):
 - **Land on the word.** A word appears on the frame its sound starts; late never.
 - **Picture first.** One big graphic performs the claim; captions stay small (60 to 70 px); large type only for the hero word.
 - **One idea, one accent.** At most ~6 words visible; one accent colour, plus at most one "event colour" for the scene.
 - **Never frozen, never empty.** Every background drifts; every scene pushes in slowly; holds under 0.5 s, except one motivated hold per video (usually the pattern interrupt). A cut never shows an empty frame: the first element lands on the cut, and staggered props start 0.25 to 0.7 s before it.
-- **Fast in, hard out.** Entrances 4 to 9 frames with overshoot and blur; exits are hard cuts on the sentence boundary.
+- **Fast in, hard out.** Entrances 4 to 9 frames with overshoot and blur (a style world may replace the entrance kind, never the speed); exits are hard cuts on the sentence boundary.
 - **Contrast of worlds.** Consecutive scenes change light/dark or world.
 
 Check before rendering: one still per scene after its hero word (`remotion still --frame=N --scale=0.3`), tiled into a sheet. Look for clipped text, overlaps, illegible marks, and scenes that look alike.
@@ -92,7 +92,7 @@ Never ship a silent bed under the voice without telling the user. One music trac
 
 ## 8. Render, review, deliver
 
-Render to a versioned file (`name_v1.mp4`, `name_v2.mp4`). Inspect a frame strip around **every** cut, audio/picture sync at three hero words, and audio coverage (`ffprobe`: audio as long as the video, no silent tail). Deliver the file, the stills sheet, the cost of the run, and each check with its evidence label (`measured`, `reviewed:<method>`, `user-accepted`, `not-performed`); a contact sheet is not a playback review and a transcript match is not a pronunciation check. Keep `<project>/record.md` current (script versions, voice settings, glossary, credits, render version, defects, handoff) so Claude or Codex can pick the work up.
+Render to a versioned file (`name_v1.mp4`, `name_v2.mp4`). Inspect a frame strip around **every** cut, audio/picture sync at three hero words, audio coverage (`ffprobe`: audio as long as the video, no silent tail), and loudness (about −14 LUFS, true peak ≤ −1 dB). Deliver the file, the stills sheet, the cost of the run, and each check with its evidence label (`measured`, `reviewed:<method>`, `user-accepted`, `not-performed`); a contact sheet is not a playback review and a transcript match is not a pronunciation check. Keep `<project>/record.md` current (script versions, voice settings, glossary, credits, render version, defects, handoff) so Claude or Codex can pick the work up.
 
 **Revisions:** touch only what the user named and bump the version. A changed line invalidates its take, its timings and its pronunciation check; if a request breaks a lock, offer the nearest option with its credit cost in one line.
 
@@ -148,4 +148,5 @@ All `at` values are absolute seconds of the spoken word, so the storyboard reads
 | `references/visual-metaphors.md` | choosing what each scene shows |
 | `references/timing-and-motion.md` | durations, easing, cut rhythm |
 | `references/design-system.md` | palette, type scale, safe zones, RTL |
+| `references/style-worlds.md` | choosing the video's overall look; native moves; craft rules for reading time, sound transitions and loudness |
 | `references/remotion-notes.md` | setup, Windows notes, audio, QA commands, known pitfalls |
