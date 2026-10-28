@@ -15,6 +15,10 @@ Built for Hebrew first: the skill includes a tested Hebrew pronunciation lexicon
 
 Restart Claude Code after installing.
 
+### From a phone
+
+The plugin can be added to your account from the Claude mobile app (Customize, then Plugins, then Add marketplace, `eliranpv11/kinetic-motion-graphics`). Rendering a video needs Node.js, ffmpeg and Python on a computer, so the practical way to use it from a phone is [Remote Control](https://code.claude.com/docs/en/remote-control.md): start Claude Code on your computer with the plugin installed, and continue that session from the phone. Cloud sessions do not install plugins from GitHub automatically, and ffmpeg and Remotion are not confirmed to run there.
+
 ### Skill only (no plugin)
 
 Copy the folder `skills/kinetic-motion-graphics` into `~/.claude/skills/` (Windows: `%USERPROFILE%\.claude\skills\`). Remove any older copy first so Claude does not see two versions.
