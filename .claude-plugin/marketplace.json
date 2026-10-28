@@ -1,0 +1,19 @@
+{
+  "name": "eliran-video-tools",
+  "owner": {
+    "name": "Eliran"
+  },
+  "metadata": {
+    "description": "Eliran's video production plugins for Claude Code.",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "kinetic-motion-graphics",
+      "source": "./",
+      "description": "Text in, video out: studio-grade Remotion motion-graphics videos with Hebrew/English voiceover, word-synced kinetic typography, music and SFX.",
+      "version": "1.1.0",
+      "category": "media"
+    }
+  ]
+}

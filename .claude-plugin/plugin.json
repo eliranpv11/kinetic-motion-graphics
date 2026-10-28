@@ -1,0 +1,12 @@
+{
+  "name": "kinetic-motion-graphics",
+  "version": "1.1.0",
+  "description": "Text in, video out: turns any script, idea or article into a studio-grade vertical motion-graphics video rendered with Remotion, with a natural Hebrew or English voiceover, word-synced kinetic typography, visual metaphors, music and sound effects.",
+  "author": {
+    "name": "Eliran"
+  },
+  "homepage": "https://github.com/eliranpv11/kinetic-motion-graphics",
+  "repository": "https://github.com/eliranpv11/kinetic-motion-graphics",
+  "keywords": ["remotion", "motion-graphics", "kinetic-typography", "video", "hebrew", "voiceover", "elevenlabs", "reels", "tiktok", "shorts"],
+  "license": "MIT"
+}
