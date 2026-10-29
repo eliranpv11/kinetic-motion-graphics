@@ -5,7 +5,7 @@
 - **Base trio:** brand accent + near-black ink + warm cream. Most scenes use only these.
 - **Event colour:** a scene may switch its whole world to one strong colour to mark a beat: comic yellow (excitement), blueprint blue (building, technical), cosmic violet (magic, "AI"), neon on navy (levels, performance), accent orange (wipe, end card).
 - Never two event colours in one scene. Never the accent on a background of a similar hue.
-- Defaults in `kit/theme.ts` use Claude orange `#D97757`; swap `C.accent` for another brand.
+- Defaults in `kit/theme.ts` use a warm orange `#D97757`; swap `C.accent` for the user's brand colour when they have one. The kit's `Spark` mark resembles Claude's logo: use it only in videos about Claude, never as the user's own logo.
 
 ## Type
 

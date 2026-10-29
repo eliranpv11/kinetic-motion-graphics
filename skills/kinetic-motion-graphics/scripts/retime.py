@@ -6,10 +6,11 @@ Usage:
 Aligns the words of the old and new takes (difflib on normalised words, so ASR splitting
 "ובנה" vs "הוא בנה" or punctuation differences do not matter), builds a piecewise-linear
 old->new time map through the matched word starts, and rewrites every time literal:
-  at={x}  from: x  to: x  sendAt={x}  pressAt={x}  tossAt={x}  flyAt={x}  maxAt={x}  fullAt={x}
-  resolveAt={x}  hi: x  lit: x  fly: x  dimAt={x}  on={x}  scan={[a, b]}  peaks={[...]}
-  ['word', x] tuples   DURATION_* = x
-Numbers in other contexts (sizes, push, colours) are left alone. Prints every change.
+  at={x}  until={x}  t={x}  every <name>At={x} / <name>At: x (sendAt, flatAt, freezeAt, onAt, ...)
+  from: x  to: x  hi: x  lit: x  fly: x  at: x  scan={[a, b]}  peaks={[...]}  shakes: [...]
+  ['word', x] tuples   ...[a, b, c].map(  arrays   DURATION_* = x
+Numbers in other contexts (sizes, push, colours) are left alone. Prints every change, then
+warns about any *At value it could not map, so nothing fires at an old time without notice.
 """
 import argparse, bisect, difflib, io, json, re
 
@@ -22,6 +23,8 @@ a = ap.parse_args()
 
 old = json.load(io.open(a.old, encoding="utf-8"))
 new = json.load(io.open(a.new, encoding="utf-8"))
+if not old or not new:
+    raise SystemExit("one of the words.json files is empty; re-run word_timings.py on that take")
 norm = lambda w: re.sub(r"[^\w]", "", w["w"]).lower()
 sm = difflib.SequenceMatcher(a=[norm(w) for w in old], b=[norm(w) for w in new], autojunk=False)
 pairs = [(old[blk.a + k]["start"], new[blk.b + k]["start"]) for blk in sm.get_matching_blocks() for k in range(blk.size)]
@@ -41,7 +44,7 @@ def m(t: float) -> float:
     return round(y0 + (t - x0) * (y1 - y0) / (x1 - x0 or 1), 2)
 
 
-src = io.open(a.tsx, encoding="utf-8").read()
+src = io.open(a.tsx, encoding="utf-8", newline="").read()  # newline="": keep the file's line endings
 changes = []
 
 
@@ -53,12 +56,12 @@ def sub_num(match):
     return f"{match.group(1)}{nt}"
 
 
-keys = r"(?:at|sendAt|pressAt|tossAt|flyAt|maxAt|fullAt|resolveAt|dimAt|on|clickAt)"
+num = r"(\d+(?:\.\d+)?)"
 patterns = [
-    rf"(\b{keys}=\{{)(\d+(?:\.\d+)?)",
-    r"(\b(?:from|to|hi|lit|fly|at):\s*)(\d+(?:\.\d+)?)",
-    r"(\['[^']+',\s*)(\d+(?:\.\d+)?)",
-    r"(DURATION_\w*\s*=\s*)(\d+(?:\.\d+)?)",
+    rf"(\b(?:at|until|t|on|\w+At)=\{{){num}",
+    rf"(\b(?:from|to|hi|lit|fly|at|\w+At):\s*){num}",
+    rf"(\['[^']+',\s*){num}",
+    rf"(DURATION_\w*\s*=\s*){num}",
 ]
 for p in patterns:
     src = re.sub(p, sub_num, src)
@@ -70,7 +73,12 @@ def sub_list(match):
 
 
 src = re.sub(r"(\b(?:scan|peaks)=\{\[)([\d.,\s]+)(\]\})", sub_list, src)
-io.open(a.out or a.tsx, "w", encoding="utf-8").write(src)
+src = re.sub(r"(\bshakes:\s*\[)([\d.,\s]+)(\])", sub_list, src)
+src = re.sub(r"(\.\.\.\[)([\d.,\s]+)(\]\.map\()", sub_list, src)
+io.open(a.out or a.tsx, "w", encoding="utf-8", newline="").write(src)
 print(f"{len(changes)} values re-timed")
 for c in changes:
     print(" ", c)
+left = sorted({f"{k}={v}" for k, v in re.findall(r"\b(\w+At)=\{\s*([A-Za-z_][\w.]*)", src)})
+if left:
+    print("check by hand (non-numeric *At values, e.g. variables):", ", ".join(left[:20]))

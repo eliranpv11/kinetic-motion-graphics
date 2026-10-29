@@ -1,6 +1,6 @@
 # Writing spoken Hebrew for short video
 
-How to choose the words so the script sounds like an Israeli talking, not like a translation or an AI. (How to spell those words for the voice model is in `hebrew-pronunciation.md`.) Adapted from the user's Hebrew Ghostwriter skill, keeping only what fits a 30-second spoken script; its text-detector tricks are deliberately left out.
+How to choose the words so the script sounds like an Israeli talking, not like a translation or an AI. (How to spell those words for the voice model is in `hebrew-pronunciation.md`.) Adapted from a Hebrew writing style guide, keeping only what fits a 30-second spoken script; its text-detector tricks are deliberately left out.
 
 ## Contents
 1. The one test

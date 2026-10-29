@@ -112,7 +112,7 @@ export const ChatInput: React.FC<{text: string; at: number; sendAt: number; widt
   );
 };
 
-/** The Claude-style spark mark. */
+/** A spark mark in the style of Claude's logo: only for videos about Claude, never as the user's own logo. */
 export const Spark: React.FC<{size?: number; color?: string; spin?: number}> = ({size = 120, color = C.accent, spin = 0}) => (
   <svg width={size} height={size} viewBox="0 0 100 100">
     <g transform={`rotate(${spin * 0.8} 50 50)`}>

@@ -3,7 +3,7 @@
 ## Setup
 
 - Node 18+ (tested with Node 22). `npm install` in the copied template. The template's `package.json` pins Remotion 4.x; keep `remotion`, `@remotion/cli`, `@remotion/google-fonts` and `@remotion/media-utils` on the same version.
-- The first render downloads a headless Chrome build automatically.
+- The first render downloads a headless Chrome build automatically (about 120 MB, once).
 - Windows: if `node`/`npm` are not on PATH in a non-interactive shell (version managers such as fnm or nvm only add them in interactive shells), prepend the Node install folder to PATH for the command, or call `node node_modules/@remotion/cli/remotion-cli.js ...` directly.
 
 ## Audio
@@ -30,7 +30,7 @@ Uses `medium` by default (CPU, int8, about 1 to 2 min for 40 s). It decodes audi
 # one still per scene (after its hero word), quarter size
 npx remotion still Main out/s_12.4.png --frame=372 --scale=0.3
 # tile stills into a contact sheet
-ffmpeg -i a.png -i b.png -i c.png -filter_complex hstack=3 sheet.png
+ffmpeg -i out/s_%02d.png -vf tile=5x3 out/sheet.png      # stills named s_01.png, s_02.png, ...
 # frame strip around a cut at 13.3 s
 ffmpeg -ss 13.1 -t 0.5 -i out/video.mp4 -vf "scale=180:-1,tile=8x2" strip.png
 ```

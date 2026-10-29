@@ -6,10 +6,9 @@ Usage:
 Writes [{"w": word, "start": sec, "end": sec}, ...] and prints a readable list.
 Audio is decoded with ffmpeg (must be on PATH) to avoid PyAV version issues.
 Transcribed words are for TIMING only; the on-screen text comes from the approved script.
+The first run downloads the speech model once (medium: about 1.5 GB; --model small: about 0.5 GB, less accurate).
 """
-import argparse, json, subprocess
-import numpy as np
-from faster_whisper import WhisperModel
+import argparse, json, shutil, subprocess, sys
 
 ap = argparse.ArgumentParser()
 ap.add_argument("audio")
@@ -17,6 +16,14 @@ ap.add_argument("out")
 ap.add_argument("--lang", default="he")
 ap.add_argument("--model", default="medium")
 a = ap.parse_args()
+
+try:
+    import numpy as np
+    from faster_whisper import WhisperModel
+except ImportError:
+    sys.exit("Missing Python packages. Run with uv (see Usage above) or: python -m pip install faster-whisper numpy")
+if not shutil.which("ffmpeg"):
+    sys.exit("ffmpeg is not installed or not on PATH. Run scripts/check_env.py for the install command.")
 
 pcm = subprocess.run(
     ["ffmpeg", "-v", "error", "-i", a.audio, "-ac", "1", "-ar", "16000", "-f", "s16le", "-"],

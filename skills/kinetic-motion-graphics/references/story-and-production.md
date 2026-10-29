@@ -1,6 +1,6 @@
 # Story, cutting and production discipline
 
-Ideas adapted from the user's ai-video-directing skill that transfer to code-rendered motion graphics. Read with SKILL.md steps 1, 2, 6 and 8.
+Ideas from AI film directing that transfer to code-rendered motion graphics. Read with SKILL.md steps 1, 2, 6 and 8.
 
 ## Contents
 1. Story before script

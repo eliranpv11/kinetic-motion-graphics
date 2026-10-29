@@ -1,17 +1,24 @@
-"""Generate royalty-free sound effects in code: whoosh, hit, click, riser, swipe.
+"""Generate royalty-free sound effects in code: whoosh, hit, click, riser, swipe, flatline (monitor beeps).
 
 Usage:
-  uv run --no-project --with numpy python -I make_sfx.py OUT_DIR
+  uv run --no-project --with numpy python -I make_sfx.py OUT_DIR      (usually remotion/public/sfx)
 
 Writes 44.1 kHz mono WAV files. They are synthesised here, so there is no cost and no licence issue.
 Use them in Remotion as <Sequence from={s(t)}><Audio src={staticFile('sfx/hit.wav')} volume={0.6} /></Sequence>.
 """
-import os, sys, wave
-import numpy as np
+import argparse, os, sys, wave
+
+ap = argparse.ArgumentParser()
+ap.add_argument("out", nargs="?", default="sfx", help="folder to write the WAV files into")
+out = ap.parse_args().out
+
+try:
+    import numpy as np
+except ImportError:
+    sys.exit("Missing Python package. Run with uv (see Usage above) or: python -m pip install numpy")
 
 SR = 44100
 rng = np.random.default_rng(7)
-out = sys.argv[1] if len(sys.argv) > 1 else "sfx"
 os.makedirs(out, exist_ok=True)
 
 

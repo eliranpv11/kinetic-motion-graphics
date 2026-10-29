@@ -1,6 +1,6 @@
 # Hooks and sound
 
-Measured from a professional 45 s kinetic promo (2026-10): the hook took 10.4 s (23% of the video) and used seven techniques before the explanation began. Videos built without that structure felt like "only part of it" to the user. Every video from this skill gets a real hook and a sound bed.
+Measured from a professional 45 s kinetic promo: the hook took 10.4 s (23% of the video) and used seven techniques before the explanation began. Videos built without that structure felt like "only part of it" to viewers. Every video from this skill gets a real hook, and a music bed whenever the user has a track they may use.
 
 ## Hook budget
 
@@ -25,7 +25,7 @@ The reference never goes silent: a continuous music bed sits under the voice (qu
 
 - **Music bed:** one track from start to end, ducked under the voice (voice peaks about -3 dB, music around -20 to -24 dB under speech, up to -14 dB in gaps). Pick a tempo of 100 to 125 BPM and place hard cuts on beats where the voice allows.
 - **Hits and whooshes:** one sound effect per major visual event: shock-word cut, stamp or slam, pull-back reveal, full-screen transition. Not on every word; four to eight per 30 s.
-- **Never on top of a spoken word.** Effects, beeps and screen shakes go in the gaps between words or end just before a word starts, above all on the hook's key word. In one accepted video a hit and two monitor beeps landed on "הרג" (the shock word) and the listener could not understand it: the effects were only 5 dB under the voice. Moved into the gaps they sat 16.6 dB under, and the word read clearly. Check with words.json: no effect may overlap the start-end span of a hero word, and the mix should keep effects at least 12 dB under the voice while someone is speaking.
+- **Never on top of a spoken word.** Effects, beeps and screen shakes go in the gaps between words or end just before a word starts, above all on the hook's key word. In one test video a hit and two monitor beeps landed on "הרג" (the shock word) and the listener could not understand it: the effects were only 5 dB under the voice. Moved into the gaps they sat 16.6 dB under, and the word read clearly. Check with words.json: no effect may overlap the start-end span of a hero word, and the mix should keep effects at least 12 dB under the voice while someone is speaking.
 - **The punctuation hit goes after the sentence.** The listener's preferred fix: let the shock sentence play completely clean, then put the effect, the jump and the visual event (beep + shake + flatline) together in the silence right after it, like a full stop. Find that silence on the waveform, not in words.json (ASR stretched "וידאו" to 2.30 s while the audio was silent from 1.92 s).
 - **Silence as a tool:** in the pattern-interrupt gap, pull the music down (or filter it) for 0.5 to 1 s, then bring it back on the payoff hit.
 - **Sources:** use music and effects the user owns or has a licence for (their library, a royalty-free library, or a generator they have access to). Do not lift audio from a reference video. If no source is available, say so; never ship silence under the voice without telling the user.

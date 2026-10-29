@@ -14,6 +14,7 @@ Status in the tables: **tested** = a native listener approved (or rejected) it i
 7. Homographs: when niqqud is required
 8. Numbers, letters and symbols
 9. Tone and delivery (keep it human)
+10. Names, gender and context
 
 ## 1. Input strategy
 
@@ -25,7 +26,7 @@ Models such as ElevenLabs v4 learned mostly from **unpointed** Hebrew. Niqqud he
 4. **Loanwords:** write them as they are written on Israeli social media, unpointed (`קלוד`, `טיימליין`, `פרומפט`). Short Latin acronyms can stay Latin (`AI`). **tested**
 5. **Never use IPA between slashes in a Hebrew line.** The model says the word "slash". **tested**
 6. **If a form keeps failing, switch form** rather than repeating it: singular instead of plural (`האנימציה` for `האנימציות`), a synonym, or a rephrased sentence. **tested**
-7. **Keep a per-voice glossary** in the project (`audio/glossary.md`) and copy verified rows here.
+7. **Keep a per-voice glossary** in the project (`audio/glossary.md`). This file is part of the installed skill: never edit it during a production; new findings go to the project glossary (and, if the user wants, to the skill's GitHub as a contribution).
 
 ElevenLabs also offers pronunciation dictionaries (alias rules: "when you see X, say Y") in its app and API. When available in the tools you have, put the stubborn words there once instead of respelling them in every script.
 
@@ -42,13 +43,13 @@ ElevenLabs also offers pronunciation dictionaries (alias rules: "when you see X,
 | פיסקה | `פיסקה` | pis-KA | `פִּסְקָה` / `כְּפִסְקָה` misread |
 | AI | `AI` | EY-ay | `/ˈeɪ ˈaɪ/` spoken as "slash" |
 | בתגובות | `בתגובות` | bat-gu-VOT | (unpointed by rule after the סקיל failure) |
-| אנימציות (no article) | `אנימציות` | a-ni-MATS-yot | **tested, user-accepted**: the plural reads fine without ה; with ה (האנימציות) it failed three times |
-| הרג (את) | `הָרַג אֶת עורכי הווידאו` | ha-RAG et or-KHEI ha-VI-de-o | **tested, user-accepted in the final video** (chosen from three variants). Unpointed `הרג` lost its ר and sounded odd (the listener: "where is the resh?"), and without a pause it merged with the next word. Pointing this short, shva-free word plus adding `אֶת` gave a clear ha-RAG. Lesson: niqqud does help on short words without shva |
-| הכול | `הכול` | ha-KOL | **tested, user-accepted** (standard plene; not הכל) |
+| אנימציות (no article) | `אנימציות` | a-ni-MATS-yot | **tested**: the plural reads fine without ה; with ה (האנימציות) it failed three times |
+| הרג (את) | `הָרַג אֶת עורכי הווידאו` | ha-RAG et or-KHEI ha-VI-de-o | **tested** in a finished video (chosen from three variants). Unpointed `הרג` lost its ר and sounded odd (the listener: "where is the resh?"), and without a pause it merged with the next word. Pointing this short, shva-free word plus adding `אֶת` gave a clear ha-RAG. Lesson: niqqud does help on short words without shva |
+| הכול | `הכול` | ha-KOL | **tested** (standard plene; not הכל) |
 | יודע (not ידע) | `יודע` | yo-DE-a | rephrased: unpointed `ידע` is a homograph (yada / yeda) |
-| מטורפת, אמיתי, להתקין, ליצור, מיליון, בכלל | unpointed | me-tó-re-fet, a-mi-TI, le-hat-KIN, li-TSOR, mil-YON, bikh-LAL | **tested, user-accepted** in the v6 take |
-| ראשל (brand, Rashel) | `רָשֶׁל` (pointed) | ra-SHEL | **tested, user-accepted** (2026-10-28, Rashel Beauty). Unpointed `ראשל` was read wrongly inside the full take (it passed in an isolated probe line). `רָשֶׁל ביוטי` chosen by ear from 4 spellings (`רָשֶׁל`, `רֵאשֶׁל`, `רָאשֶׁל`, `רֶשֶׁל`). Example of the rule for invented names in section 10 |
-| קנית (you bought, f) | `אַת קָנִית` | at ka-NIT | **tested, user-accepted**. `קנית` and pointed `קָנִית` alone were read as masculine (ka-NI-ta); adding the pronoun `אַת` forced the feminine. Example of the gender rule in section 10 |
+| מטורפת, אמיתי, להתקין, ליצור, מיליון, בכלל | unpointed | me-tó-re-fet, a-mi-TI, le-hat-KIN, li-TSOR, mil-YON, bikh-LAL | **tested** in a full take |
+| (an invented brand name) | the pointed form chosen by ear | – | **tested**. The unpointed spelling passed in an isolated probe line but was read wrongly inside the full take; the pointed spelling was chosen by ear from 4 variants. Example of the rule for invented names in section 10 |
+| קנית (you bought, f) | `אַת קָנִית` | at ka-NIT | **tested**. `קנית` and pointed `קָנִית` alone were read as masculine (ka-NI-ta); adding the pronoun `אַת` forced the feminine. Example of the gender rule in section 10 |
 
 ## 3. Tech, AI and software loanwords (rule unless marked)
 
@@ -187,6 +188,7 @@ Point only the ambiguous word, with the vowel that decides it, and keep shva mar
 - English brand names in Latin may switch the voice into English mid-sentence; prefer the Hebrew transliteration unless the brand is an acronym.
 
 ## 9. Tone and delivery (keep it human)
+10. Names, gender and context
 
 - A native listener wants it to sound like a person talking, not an AI announcer: **balanced, neither monotone nor hyped.** One opening tag (`[confident]` or `[conversational] [warmly]`), no tag switches later. **tested**: an `[excited]` mid-script line ("וּבָנָה מִזֶּה סִרְטוֹן!") was rejected as over-energetic; the listener approved a single-`[conversational]` read (spread 11.4 st) and a `[confident]` read (13.4 st); a `[conversational] [warmly]` read measured flat (9.8 st).
 - No `!` in the voice input; full stops and commas only. Keep `!` for the on-screen text if wanted.
@@ -198,4 +200,4 @@ Point only the ambiguous word, with the vowel that decides it, and keep shva mar
 - **Names and invented words** (brands, products, people, places, any word not in a dictionary): never trust the unpointed spelling. Put each one in the probe line, pointed, in 3 to 4 spelling variants in ONE take (about 75 credits), and let the user choose by ear. Then confirm it again in the full take.
 - **Forms spelled the same for masculine and feminine** (past-tense second person, present-tense verbs, `אותך`, `לך`, `שלך`): the model may voice the wrong gender even when the rest of the script is clear. For every line addressed to a specific gender, verify these words by ear in the probe. Fixes in order: add the pronoun (`אַת ...`), add niqqud, rephrase to a form that differs between genders.
 - **A probe result is a sample, not a guarantee.** The same word can be read differently inside a long sentence than in a short test line. For words the user cared about, check them again in the full take and reuse the approved clip (see `hebrew-voice.md`, "Fixing one word after the take is approved").
-- **Record every verified word** in section 2 with the input that worked, the input that failed, and the reading, so the next production starts from it. Rows are examples of what to try, not a closed list: apply the same method to any new word.
+- **Record every verified word** in the project's `audio/glossary.md` (same columns as section 2) with the input that worked, the input that failed, and the reading, so the next production starts from it. Rows are examples of what to try, not a closed list: apply the same method to any new word.

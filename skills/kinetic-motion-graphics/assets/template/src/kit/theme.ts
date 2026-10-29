@@ -12,7 +12,7 @@ export const H = 1920;
 
 // Base palette: brand accent + ink + cream. Each scene may add ONE "event" colour on top.
 export const C = {
-  accent: '#D97757', // Claude orange
+  accent: '#D97757', // warm orange; swap for the user's brand colour
   accentDeep: '#B85A3C',
   ink: '#141413',
   inkSoft: '#1E1D1B',

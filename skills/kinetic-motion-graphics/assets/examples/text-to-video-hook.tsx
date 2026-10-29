@@ -1,46 +1,24 @@
-// APPROVED EXAMPLE (user-accepted 2026-10-27): a full 38 s Hebrew text-to-video with a 7 s hook, 13 scenes and code-made SFX.
-// Copy into src/ next to kit/ to run it. Pair: voice in public/voice_v6.wav, effects in public/sfx/, words from scripts/word_timings.py.
+// EXAMPLE STORYBOARD (tested end to end): a full 38 s Hebrew text-to-video with a 7 s hook, 13 scenes and code-made SFX.
+// To run it: copy it over src/Video.tsx (it exports Video and DURATION_SECONDS like the template). Voice in public/voice.wav, effects in public/sfx/ (scripts/make_sfx.py), words from scripts/word_timings.py.
 // Study it for: hook structure (identity, shock, defuse, interrupt, two-step payoff, meta proof), colour-script comments,
 // pre-rolled props on cuts, Swap captions, and the SFX array.
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
 import {C, FONT, s} from './kit/theme';
 import {Scenes, SceneDef} from './kit/scene';
-import {Stack, Word} from './kit/text';
+import {After, Hide, Stack, Swap, Word} from './kit/text';
 import {IrisWipe, Solid} from './kit/backgrounds';
 import {ChatInput, FileCard, Spark} from './kit/props';
 import {Envelope, FilmStrip, Morph, SceneCard} from './kit/document';
 import {AutoToggle, BeforeAfter, CleanFrame, ControlsToButton, EasingCurve, GlitchFrame, IconSteps, Magnifier} from './kit/showcase';
 import {CodeReveal, OutlineFill, PhoneFeed, PulseMonitor} from './kit/hook';
 
-// v6: the user's script (proofread, SCRIPT_v6.md). Voice: audio/v6/take1_spliced.wav = take1.mp3 with 0-1.92 s replaced by
-// harag/B_harag_et.mp3 ("קלוד הָרַג אֶת עורכי הווידאו", chosen by the user for a clear ר), eleven_v4, [confident].
-// Times = absolute word starts from audio/v6/words.json.
+// Voice: one eleven_v4 take with [confident]; the first sentence ("קלוד הָרַג אֶת עורכי הווידאו") was spliced in from a probe clip
+// chosen by ear for a clear ר (see references/hebrew-voice.md). Times = absolute word starts from words.json.
 // Spine: the "AI kills editors" claim is noise -> this video itself is the proof -> now you can do it too.
-export const DURATION_V6 = 37.9;
+export const DURATION_SECONDS = 37.9;
 
 const CAP = 66;
-const Hide: React.FC<{until: number; children: React.ReactNode}> = ({until, children}) => {
-  const f = useCurrentFrame();
-  return f < Math.round(until * 30) + 3 ? <>{children}</> : null;
-};
-/** Mounts children only from second `t` (hooks must live in a component, never in a scene's render()). */
-const After: React.FC<{t: number; children: React.ReactNode}> = ({t, children}) => {
-  const f = useCurrentFrame();
-  return f >= s(t) ? <>{children}</> : null;
-};
-const Swap: React.FC<{items: [string, number][]; size?: number; color?: string}> = ({items, size = CAP, color = C.white}) => (
-  <div style={{position: 'relative', height: size * 1.4, width: 1000}}>
-    {items.map(([t, a], i) => (
-      <Hide key={t} until={items[i + 1]?.[1] ?? 999}>
-        <div style={{position: 'absolute', inset: 0, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <Word text={t} at={a} size={size} weight={700} color={color} />
-        </div>
-      </Hide>
-    ))}
-  </div>
-);
-
 const scenes: SceneDef[] = [
   // colour: ink + lime flash | identity in 0.4 s
   {
@@ -310,10 +288,10 @@ const SFX: [string, number, number][] = [
   ['whoosh', 36.7, 0.45],
 ];
 
-export const SkillV6: React.FC = () => (
+export const Video: React.FC = () => (
   <AbsoluteFill style={{background: C.ink}}>
     <Scenes scenes={scenes} />
-    <Audio src={staticFile('voice_v6.wav')} />
+    <Audio src={staticFile('voice.wav')} />
     {SFX.map(([name, t, v], i) => (
       <Sequence key={i} from={s(t)} durationInFrames={name === 'beep' ? 3 : 60}>
         <Audio src={staticFile(`sfx/${name === 'beep' ? 'flatline' : name}.wav`)} volume={v} />

@@ -20,7 +20,9 @@
 
 ## 🧰 מה צריך לפני שמתחילים
 
-אלה תוכנות חינמיות שמתקינים פעם אחת במחשב. Claude משתמש בהן כדי לבנות את הסרטון.
+**בקצרה: רק את Claude Code ואת הפלאגין.** בפעם הראשונה Claude בודק לבד מה מותקן אצלכם במחשב. אם משהו חסר, הוא מסביר בשפה פשוטה בשביל מה צריך אותו ומציע להתקין. שום דבר לא מותקן בלי שתאשרו.
+
+לסקרנים, אלה התוכנות החינמיות ש־Claude משתמש בהן כדי לבנות את הסרטון:
 
 | מה | בשביל מה | איך בודקים שזה מותקן |
 |---|---|---|
@@ -28,9 +30,11 @@
 | **[Node.js](https://nodejs.org)** גרסה 18 ומעלה | בונה את הסרטון (Remotion) | `node -v` |
 | **[ffmpeg](https://ffmpeg.org/download.html)** | מחבר בין הקול לתמונה | `ffmpeg -version` |
 | **[Python](https://www.python.org/downloads/)** גרסה 3.10 ומעלה | מודד מתי כל מילה נאמרת | `python --version` |
-| **חשבון [ElevenLabs](https://elevenlabs.io)** | הקול שמקריא את התסריט (בתשלום) | מחברים אותו ל־Claude כקונקטור, או עם מפתח API |
+| **חשבון [ElevenLabs](https://elevenlabs.io)** (לא חובה) | הקול שמקריא את התסריט (בתשלום) | מחברים אותו ל־Claude כקונקטור, או עם מפתח API |
 
-> 💡 **לא בטוחים מה מותקן?** אפשר פשוט לכתוב ל־Claude: "תבדוק אם יש לי Node, ffmpeg ו־Python, ותעזור לי להתקין מה שחסר". הוא יבדוק ויסביר צעד אחר צעד.
+> 💡 **אין לכם ElevenLabs?** אפשר להקליט את התסריט בקול שלכם בטלפון ולשלוח ל־Claude את הקובץ. זה חינם, ו־Claude בונה את הסרטון סביב ההקלטה.
+
+> 🔑 **מפתח API של ElevenLabs** מגדירים רק אצלכם במחשב, כמשתנה סביבה בשם `ELEVENLABS_API_KEY`. Claude יסביר איך. אף פעם אל תדביקו מפתח בצ'אט.
 
 ---
 
@@ -69,7 +73,7 @@ claude plugin update kinetic-motion-graphics@eliran-video-tools
 
 </div>
 
-- **אם העליתם קובץ ZIP לאפליקציה**: מעלים שוב את קובץ ה־ZIP החדש באותו מקום, והוא מחליף את הישן.
+- **אם העליתם קובץ ZIP לאפליקציה** (מורידים אותו מגיטהאב: הכפתור הירוק **Code** ואז **Download ZIP**): מורידים ZIP חדש באותה דרך ומעלים אותו באותו מקום, והוא מחליף את הישן.
 
 ---
 
@@ -93,6 +97,7 @@ claude plugin update kinetic-motion-graphics@eliran-video-tools
 
 | שלב | מה Claude עושה | מה אתם עושים | עולה כסף? |
 |---|---|---|---|
+| 0 | בודק שהכול מותקן, ושואל סבב שאלות אחד קצר (אורך, קול, מוזיקה) | **עונים, או מאשרים את ברירות המחדל** | לא |
 | 1 | קורא את הטקסט ומוצא את המסר המרכזי | – | לא |
 | 2 | כותב תסריט עם פתיחה חזקה, תוכן וקריאה לפעולה | **מאשרים את התסריט** | לא |
 | 3 | מקריא שורת ניסיון קצרה עם המילים הקשות להגייה | **מקשיבים ומאשרים** | מעט (כ־100 קרדיטים) |
@@ -158,7 +163,7 @@ Claude בוחר סגנון שמתאים לנושא, או שאתם מבקשים �
 
 ## 🤝 רוצים לעזור?
 
-הכי עוזר: מילים בעברית שההקראה מבטאת לא נכון. פתחו Issue או Pull Request עם המילה, הכתיב שעבד, הכתיב שנכשל ואיך זה נשמע (פרטים בסעיף 2 של `references/hebrew-pronunciation.md`).
+הכי עוזר: מילים בעברית שההקראה מבטאת לא נכון. פתחו Issue או Pull Request עם המילה, הכתיב שעבד, הכתיב שנכשל ואיך זה נשמע (פרטים בסעיף 2 של `skills/kinetic-motion-graphics/references/hebrew-pronunciation.md`).
 
 רישיון MIT: מותר להשתמש, לשנות ולשתף. ראו [LICENSE](LICENSE).
 
@@ -181,7 +186,7 @@ Built for Hebrew first: the skill includes a tested Hebrew pronunciation lexicon
 /plugin install kinetic-motion-graphics@eliran-video-tools
 ```
 
-Restart Claude Code after installing. To update later, run `claude plugin marketplace update eliran-video-tools` and `claude plugin update kinetic-motion-graphics@eliran-video-tools` in a terminal, then restart. If you installed by uploading a ZIP in the Claude app, upload the new ZIP the same way.
+Restart Claude Code after installing. To update later, run `claude plugin marketplace update eliran-video-tools` and `claude plugin update kinetic-motion-graphics@eliran-video-tools` in a terminal, then restart. If you installed by uploading a ZIP in the Claude app (GitHub: Code, then Download ZIP), download a fresh ZIP and upload it the same way.
 
 ### From a phone
 
@@ -205,7 +210,9 @@ Claude writes the script, asks for your approval, runs a cheap pronunciation pro
 | Node.js 18+ | Remotion render (`npm install` inside the project template) |
 | ffmpeg | audio processing and final mux |
 | Python 3.10+ with `faster-whisper`, `numpy` (and `librosa` for the pitch report) | word timings and delivery report |
-| ElevenLabs account (connected to Claude, or API access) | Hebrew / English voiceover (paid, about 1 credit per character) |
+| ElevenLabs account (connector, or `ELEVENLABS_API_KEY` for `scripts/tts_elevenlabs.py`), optional | Hebrew / English voiceover (paid, about 1 credit per character); without it, record the voice yourself |
+
+You do not have to install these yourself first: on the first run the skill runs `scripts/check_env.py`, explains what is missing and offers the install command for your OS.
 
 ## What's inside
 
@@ -215,13 +222,13 @@ commands/          /kinetic-video
 skills/kinetic-motion-graphics/
   SKILL.md         the 8-step pipeline, approval gates, cost rules
   references/      design system, style worlds, Hebrew writing, pronunciation, voice, timing, hooks and sound, metaphors
-  scripts/         word_timings.py, retime.py, pitch_report.py, make_sfx.py
+  scripts/         check_env.py, tts_elevenlabs.py, word_timings.py, retime.py, pitch_report.py, make_sfx.py
   assets/          Remotion project template, component kit, a full example storyboard
 ```
 
 ## Contributing
 
-Pronunciation findings are the most valuable contribution: open an issue or a pull request with the word, the input that worked, the input that failed, and how it sounded (see section 2 of `references/hebrew-pronunciation.md`).
+Pronunciation findings are the most valuable contribution: open an issue or a pull request with the word, the input that worked, the input that failed, and how it sounded (see section 2 of `skills/kinetic-motion-graphics/references/hebrew-pronunciation.md`).
 
 ## License
 
